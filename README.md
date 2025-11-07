@@ -62,9 +62,6 @@ cp .env.example .env
 Required environment variables:
 ```env
 OPENAI_API_KEY=your_openai_api_key
-VECTOR_DB_PATH=./data/vector_store
-UPLOAD_DIR=./data/uploads
-LOG_LEVEL=INFO
 ```
 
 ### Running the Application
@@ -203,46 +200,28 @@ Response:
 
 ```
 infobot/
-├── main.py                 # Application entry point
 ├── requirements.txt        # Python dependencies
 ├── .env.example           # Environment variables template
 ├── README.md              # Project documentation
 ├── app/
-│   ├── __init__.py
-│   ├── api/
-│   │   ├── __init__.py
-│   │   ├── routes/
-│   │   │   ├── documents.py    # Document management endpoints
-│   │   │   ├── chat.py         # Chat interface endpoints
-│   │   │   └── health.py       # Health check endpoints
-│   │   └── dependencies.py     # Shared dependencies
-│   ├── core/
-│   │   ├── __init__.py
-│   │   ├── config.py          # Configuration management
-│   │   ├── logging.py         # Logging setup
-│   │   └── exceptions.py      # Custom exceptions
-│   ├── services/
-│   │   ├── __init__.py
-│   │   ├── document_processor.py  # Document parsing & chunking
-│   │   ├── vector_store.py        # Vector DB operations
-│   │   ├── retriever.py           # Document retrieval logic
-│   │   └── chat_engine.py         # RAG pipeline orchestration
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── document.py        # Document models
-│   │   └── chat.py            # Chat models
-│   └── utils/
-│       ├── __init__.py
-│       └── helpers.py         # Utility functions
+│   ├── __pycache__/
+│   ├── api_util.py # utility function to access api front frontend to backend
+│   ├── app.py # main streamlit interface
+│   ├── display_chat_interface.py # UI for chat window
+│   ├── sidebar.py # UI for sidebar
+├── api/
+│   ├── __pycache__/
+│   ├── chroma_db/
+│   ├── app.log 
+│   ├── db_utils.py # SQLite database operations for managing chat logs and document metadata
+│   ├── main.py # Main API endpoints for chat interactions, document management, and system information.
+│   ├── pydantic_models.py # Defined clear, type-safe models for our API's requests and responses.
+│   ├── rag_app.db
+│   ├── rag_chain.py # History-aware RAG chain using LangChain components
+│   ├── vector_store_integration.py # Set up document indexing and retrieval using the Chroma vector store.
 ├── data/
-│   ├── uploads/              # Uploaded documents
-│   └── vector_store/         # Vector database files
-├── logs/                     # Application logs
-└── tests/
-    ├── __init__.py
-    ├── test_api.py
-    ├── test_services.py
-    └── conftest.py
+│   ├── # Uploaded documents
+├── logs/                 
 ```
 
 ## 📈 Monitoring & Logging
